@@ -2,6 +2,35 @@
 
 A sample three-layered .NET **Train Component Management** system built with **ASP.NET Core Web API**, EF Core, Pooling & Transient Fault Retry, idempotency, bulk operations, and comprehensive testing.
 
+
+### DbContext Pooling & Transient Fault Retry
+
+> **Requirement:**  
+> “The system should be designed to efficiently handle a large number of items, optimized for both read and write operations. The system should also include robust mechanisms for handling errors and exceptional conditions, to ensure that the system remains stable and reliable even under heavy load or in the presence of network errors or other unexpected situations.”
+
+- **DbContext Pooling** improves performance by reusing `DbContext` instances instead of recreating them for every request.  
+- **EnableRetryOnFailure** automatically retries transient SQL Server errors (like deadlocks or connection timeouts), ensuring the system remains stable and reliable under high load or unreliable network conditions.
+
+---
+
+### Idempotency
+
+> **Requirement:**  
+> “Robust mechanisms for handling errors and exceptional conditions.”
+
+- When users perform create or bulk insert operations, network issues or timeouts could cause retries.  
+- Using an **`Idempotency-Key` header** ensures the same request won’t accidentally duplicate data if re-sent — it guarantees exactly-once semantics for critical operations.
+
+---
+
+### Bulk Operations
+
+> **Requirement:**  
+> “Allow users to quickly find a specific component, and also to rapidly perform operations such as adding or removing components.”
+
+- For large datasets (e.g., adding or removing hundreds or thousands of components at once), standard `SaveChangesAsync` becomes inefficient.
+- With **`EFCore.BulkExtensions`**, `BulkInsertAsync` and `BulkDeleteAsync` perform these operations with a single optimized SQL statement, dramatically improving performance.
+
 ---
 
 ## Features
