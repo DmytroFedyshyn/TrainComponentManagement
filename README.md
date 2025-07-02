@@ -33,6 +33,12 @@ A sample three-layered .NET **Train Component Management** system built with **A
 
 ---
 
+  In service layer, `CreateExecutionStrategy` is used together with `BeginTransactionAsync` to wrap all critical operations in a single atomic transaction with automatic retries for transient failures such as network issues or deadlocks.
+
+This guarantees that operations remain safe and consistent — either they succeed entirely, or they fail and roll back — providing production-level reliability exactly as required by the project spec.
+
+---
+
 ## Features
 
 ### Data Access Layer (DAL)
