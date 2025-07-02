@@ -77,13 +77,10 @@ cd TrainComponentManagement/PL
 2. **Apply migrations & seed data**:
    ```bash
    dotnet tool install --global dotnet-ef
-   dotnet ef migrations add InitialCreate \\
-     --project ../DAL/TrainComponentManagement.DAL.csproj \\
-     --startup-project TrainComponentManagement.PL.csproj
+   
+   dotnet ef migrations add InitialCreate --project ../DAL/TrainComponentManagement.DAL.csproj --startup-project TrainComponentManagement.PL.csproj
 
-   dotnet ef database update \\
-     --project ../DAL/TrainComponentManagement.DAL.csproj \\
-     --startup-project TrainComponentManagement.PL.csproj
+   dotnet ef database update --project ../DAL/TrainComponentManagement.DAL.csproj --startup-project TrainComponentManagement.PL.csproj
    ```
 
 3. **Run the API**:
